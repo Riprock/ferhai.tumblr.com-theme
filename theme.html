@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<!--
+Fergal's Theme
+https://github.com/Riprock/ferhai.tumblr.com-theme
+-->
+<html>
+    <head>
+        <meta name="color:Background" content="#808080" />
+    	<meta name="color:Content Background" content="#ffffff" />
+        <meta name="color:Description Background" content="#aaaaaa" />
+		<meta name="color:Text" content="#888888" />
+		<meta name="color:Link" content="#000000" />
+		<meta name="font:Body" content="Georgia, serif" />
+		<meta name="text:Content Width" content="500px" />
+		<title>{Title}{block:PostSummary} : {PostSummary}{/block:PostSummary}</title>
+		<link rel="alternate" type="application/rss+xml" title="RSS" href="{RSS}" />
+		<style>
+html {
+	height: 100%;
+}
+body {
+	height: 100%;
+	margin: 0;
+	text-align: justify;
+	background: {color:Background};
+	
+	color: {color:Text};
+	font-family: {font:Body};
+}
+a {
+	color: {color:Link};
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
+h1 {
+	text-align: center;
+}
+h3 {
+	margin-top: 0;
+}
+input {
+	border: 1px solid black;
+}
+blockquote {
+	font-size: 170%;
+    margin-left: 1em;
+}
+.white {
+	margin-left: 8em;
+	min-height: 100%;
+	float: left;
+	background: {color:Content Background};
+}
+.white > div {
+	padding: 1px 1em 1em 1em;
+	width: {text:Content Width};
+}
+#description {
+	float: left;
+	background: {color:Description Background};
+	padding: 1em;
+}
+h2.permalink {
+	margin: 0;
+	font-size: 100%;
+	position: absolute;
+	left: 1em;
+	width: 6em;
+	text-align: right;
+}
+ul.meta, ul#posts {
+	padding: 0;
+	list-style-type: none;
+}
+li.post {
+	border-top: 4px solid gray;
+	padding-top: 1em;
+	margin-bottom: 2em;
+}
+
+.sans {
+	font-family: sans-serif;
+}
+
+.post-body img {
+	max-width: 100%;
+}
+
+.post blockquote img {
+    margin-left: -1em;
+}
+
+{CustomCSS}
+		</style>
+	</head>
+	<body>
+		<div class="white">
+			<div>
+<h1><a href="/">{Title}</a></h1>
+<ul id="posts">
+	{block:Posts}
+	<li class="post {TagsAsClasses}">
+		{block:Date}
+		<h2 class="permalink">
+				{block:NewDayDate}
+					<a title="{NoteCountWithLabel}" href="{Permalink}">
+						{Year}-{MonthNumberWithZero}-{DayOfMonthWithZero}
+					</a>
+				{/block:NewDayDate}
+
+				{block:SameDayDate}
+					<a title="{NoteCountWithLabel}" href="{Permalink}">
+						&rarr;
+					</a>
+				{/block:SameDayDate}
+
+				{block:IfShowTheNumberOfPostNotes}
+					<a href="{Permalink}">{NoteCountWithLabel}</a>
+				{/block:IfShowTheNumberOfPostNotes}
+
+		</h2>
+		{/block:Date}
+
+		{block:Regular}
+		<div class="post-body text-post">
+			{block:Title}
+			<h3>{Title}</h3>
+			{/block:Title}
+
+			{Body}
+		</div>
+		{/block:Regular}
+
+		{block:Link}
+		<div class="post-body link-post">
+			<h3><a class="link" href="{URL}">{Name}</a></h3>
+
+			{block:Description}
+			{Description}
+			{/block:Description}
+		</div>
+		{/block:Link}
+
+		{block:Photo}
+		<div class="post-body image-post">
+			<div class="image">
+				{LinkOpenTag}<img src="{PhotoURL-500}" alt="{PhotoAlt}"/>{LinkCloseTag}
+			</div>
+
+			{block:Caption}
+			<div class="caption">{Caption}</div>
+			{/block:Caption}
+		</div>
+		{/block:Photo}
+
+		{block:Video}
+		<div class="post-body video-post">
+			{Video-500}
+
+			{block:Caption}
+			<div class="caption">{Caption}</div>
+			{/block:Caption}
+		</div>
+		{/block:Video}
+
+		{block:Audio}
+		<div class="post-body audio-post">
+			{block:AlbumArt}
+				<img src="{AlbumArtURL}" width="150" alt="{Album}" />
+			{/block:AlbumArt}
+			<div style="display: inline-block; width: 320px;">
+				<div class="audio">{AudioPlayerBlack}</div>
+				{block:trackName}
+					<p style="margin-bottom: 0;"><strong>{TrackName}</strong></p>
+				{/block:trackName}
+				{block:Artist}
+					<p style="margin: 0;">{block:Album}{Album} — {/block:Album}{Artist}</p>
+				{/block:Artist}
+			</div>
+
+			{block:Caption}
+			<div class="caption">{Caption}</div>
+			{/block:Caption}
+		</div>
+		{/block:Audio}
+
+		{block:Quote}
+		<div class="post-body quote-post">
+			<blockquote class="quote">{Quote}</blockquote>
+
+			{block:Source}
+			<p class="cite">&mdash;&#8194;{Source}</p>
+			{/block:Source}
+		</div>
+		{/block:Quote}
+
+		{block:Conversation}
+		<div class="post-body chat-post">
+			{block:Title}
+			<h3>{Title}</h3>
+			{/block:Title}
+
+			<ol>
+				{block:Lines}
+				<li>
+					{block:Label}<b class="label">{Label}</b>{/block:Label}
+					{Line}
+				</li>
+				{/block:Lines}
+			</ol>
+		</div>
+		{/block:Conversation}
+
+		{block:ContentSource}
+		<p class="post-source">
+			<span class="prefix">{lang:Source}:</span>
+			{SourceLink}
+		</p>
+		{/block:ContentSource}
+
+		{block:IfShowPostNotes}
+			{block:PostNotes}
+				{PostNotes}
+			{/block:PostNotes}
+		{/block:IfShowPostNotes}
+		
+		{block:HasTags}
+			<p>Tags:
+			{block:Tags}
+				<a href="{TagURL}">{Tag}</a>
+			{/block:Tags}
+			</p>
+		{/block:HasTags}
+	</li>
+	{/block:Posts}
+</ul>
+
+<div id="footer">
+  {block:PreviousPage}
+  <a href="{PreviousPage}">&larr; {lang:Newer posts}</a>
+  {/block:PreviousPage}
+  {block:NextPage}
+  <a href="{NextPage}">{lang:Older posts} &rarr;</a>
+  {/block:NextPage}
+</div>
+			</div>
+		</div>
+<div id="description">
+	<form action="/search" method="get" id="searchForm">
+		<input class="input" type="text" name="q" value="{SearchQuery}"/>
+		<span class="submit"><input type="submit" value="{lang:Search}"/></span>
+	</form>
+	
+	<p>{Description}</p>
+	
+	{block:HasPages}
+	<ul class="pages meta">
+		{block:Pages}
+		<li><a href="{URL}">{Label}</a></li>
+		{/block:Pages}
+	</ul>
+	{/block:HasPages}
+
+	<ul class="pages meta">
+		{block:AskEnabled}<li><a href="/ask">{AskLabel}</a></li>{/block:AskEnabled}
+		{block:SubmissionsEnabled}<li><a href="/submit">{SubmitLabel}</a></li>{/block:SubmissionsEnabled}
+	</ul>
+
+	<ul class="meta">
+		<li><a href="/archive">{lang:Archive}</a> <span class="dim">/</span> <a href="{RSS}">{lang:RSS}</a></li>
+		{block:IfLinkToLikedPosts}
+			{block:Likes}
+			<li><a href="http://www.tumblr.com/liked/by/{Name}">{lang:Stuff I Like}</a></li>
+			{/block:Likes}
+		{/block:IfLinkToLikedPosts}
+		{block:IfLinkToTheme}
+		<li><a href="http://www.tumblr.com/theme/1386">{lang:Install this theme}</a></li>
+		{/block:IfLinkToTheme}
+	</ul>
+</div>
+			</div>
+		</div>
+	</body>
+</html>
