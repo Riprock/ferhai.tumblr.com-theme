@@ -4,10 +4,10 @@ Fergal's Theme
 https://github.com/Riprock/ferhai.tumblr.com-theme
 -->
 <html>
-    <head>
-        <meta name="color:Background" content="#808080" />
-    	<meta name="color:Content Background" content="#ffffff" />
-        <meta name="color:Description Background" content="#aaaaaa" />
+	<head>
+		<meta name="color:Background" content="#808080" />
+		<meta name="color:Content Background" content="#ffffff" />
+		<meta name="color:Description Background" content="#aaaaaa" />
 		<meta name="color:Text" content="#888888" />
 		<meta name="color:Link" content="#000000" />
 		<meta name="font:Body" content="Georgia, serif" />
@@ -44,8 +44,9 @@ input {
 	border: 1px solid black;
 }
 blockquote {
-	font-size: 170%;
-    margin-left: 1em;
+	margin-left: 1em;
+	border-left: 2px solid #ccc;
+}
 }
 .white {
 	margin-left: 8em;
@@ -90,6 +91,10 @@ li.post {
 
 .post blockquote img {
     margin-left: -1em;
+}
+
+.quote-post blockquote.quote {
+	font-size: 130%;
 }
 
 {CustomCSS}
@@ -238,12 +243,12 @@ li.post {
 </ul>
 
 <div id="footer">
-  {block:PreviousPage}
-  <a href="{PreviousPage}">&larr; {lang:Newer posts}</a>
-  {/block:PreviousPage}
-  {block:NextPage}
-  <a href="{NextPage}">{lang:Older posts} &rarr;</a>
-  {/block:NextPage}
+	{block:PreviousPage}
+	<a href="{PreviousPage}">&larr; {lang:Newer posts}</a>
+	{/block:PreviousPage}
+	{block:NextPage}
+	<a href="{NextPage}">{lang:Older posts} &rarr;</a>
+	{/block:NextPage}
 </div>
 			</div>
 		</div>
