@@ -100,6 +100,59 @@ li.post {
 
 {CustomCSS}
 		</style>
+		<script>
+(function() {
+	var evalScripts = function(element) {
+		var scripts = element.getElementsByTagName('script');
+		for (var j = 0; j < scripts.length; j++) {
+			var newScript = document.createElement('script');
+			if (scripts[j].src) newScript.src = scripts[j].src;
+			newScript.innerHTML = scripts[j].innerHTML;
+			scripts[j].parentNode.removeChild(scripts[j]);
+			document.head.appendChild(newScript);
+			newScript.addEventListener('load', function(event) {
+				evalScripts(element);
+				this.removeEventListener('load', arguments.callee);
+			});
+		}
+	};
+	var page = 2;
+	var tagged = (new RegExp('/tagged/([^/]*)')).exec(window.location.pathname);
+	tagged = tagged ? tagged[1] : '';
+	var doingPage;
+	var weAreDone;
+	window.addEventListener('scroll', function(event) {
+		if (
+			window.pageYOffset + window.innerHeight * 2 >= document.documentElement.scrollHeight
+			&& doingPage != page
+			&& !weAreDone
+		) {
+			var request = new XMLHttpRequest;
+			request.onreadystatechange = function() {
+				if (request.readyState == 4) {
+					if (request.status == 200) {
+						var tempDiv = document.createElement('div');
+						tempDiv.innerHTML = request.responseText;
+						var moreContent = tempDiv.getElementsByClassName('post');
+						var posts = document.getElementById('posts');
+						for (var i = 0; i < moreContent.length; i++) {
+							evalScripts(moreContent[i]);
+							posts.appendChild(moreContent[i]);
+						}
+						page++;
+					}
+					else {
+						weAreDone = true;
+					}
+				}
+			};
+			request.open('GET', window.location.origin + '/tagged/' + tagged + '/page/' + page);
+			request.send();
+			doingPage = page;
+		}
+	})
+})();
+		</script>
 	</head>
 	<body>
 		<div class="white">
