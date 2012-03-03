@@ -125,30 +125,38 @@ li.post {
 		if (
 			window.pageYOffset + window.innerHeight * 2 >= document.documentElement.scrollHeight
 			&& doingPage != page
-			&& !weAreDone
 		) {
-			var request = new XMLHttpRequest;
-			request.onreadystatechange = function() {
-				if (request.readyState == 4) {
-					if (request.status == 200) {
-						var tempDiv = document.createElement('div');
-						tempDiv.innerHTML = request.responseText;
-						var moreContent = tempDiv.getElementsByClassName('post');
-						var posts = document.getElementById('posts');
-						for (var i = 0; i < moreContent.length; i++) {
-							evalScripts(moreContent[i]);
-							posts.appendChild(moreContent[i]);
+			if (!weAreDone) {
+				var request = new XMLHttpRequest;
+				request.onreadystatechange = function() {
+					if (request.readyState == 4) {
+						if (request.status == 200) {
+							var tempDiv = document.createElement('div');
+							tempDiv.innerHTML = request.responseText;
+							var moreContent = tempDiv.getElementsByClassName('post');
+							if (moreContent.length == 0) {
+								weAreDone = true;
+								return;
+							}
+							var posts = document.getElementById('posts');
+							for (var i = 0; i < moreContent.length; i++) {
+								evalScripts(moreContent[i]);
+								posts.appendChild(moreContent[i]);
+							}
+							page++;
 						}
-						page++;
+						else {
+							weAreDone = true;
+						}
 					}
-					else {
-						weAreDone = true;
-					}
-				}
-			};
-			request.open('GET', window.location.origin + '/tagged/' + tagged + '/page/' + page);
-			request.send();
-			doingPage = page;
+				};
+				request.open('GET', window.location.origin + '/tagged/' + tagged + '/page/' + page);
+				request.send();
+				doingPage = page;
+			}
+			else {
+				window.removeEventListener('scroll', arguments.callee);
+			}
 		}
 	})
 })();
