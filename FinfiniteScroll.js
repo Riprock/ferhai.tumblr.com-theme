@@ -1,5 +1,7 @@
 /*
-Fergal Hainey's tumblr infinite scroll script
+FinfiniteScroll
+
+Fergal Hainey's tumblr infinite scroll script.
 
 https://github.com/Riprock/ferhai.tumblr.com-theme
 */
