@@ -10,6 +10,7 @@ https://github.com/Riprock/ferhai.tumblr.com-theme
 		var scripts = element.getElementsByTagName('script');
 		for (var j = 0; j < scripts.length; j++) {
 			var newScript = document.createElement('script');
+			newScript.type = 'text/javascript';
 			if (scripts[j].src) newScript.src = scripts[j].src;
 			newScript.innerHTML = scripts[j].innerHTML;
 			scripts[j].parentNode.removeChild(scripts[j]);
@@ -38,7 +39,6 @@ https://github.com/Riprock/ferhai.tumblr.com-theme
 	page = page ? parseInt(page[1]) + 1 : 2;
 	var tagged = (new RegExp('/tagged/([^/]*)')).exec(window.location.pathname);
 	tagged = tagged ? tagged[1] : '';
-	var classRegex;
 	var postsParent;
 	var doingPage;
 	var weAreDone;
@@ -58,7 +58,6 @@ https://github.com/Riprock/ferhai.tumblr.com-theme
 								for (var i = 0; i < classes.length; i++) {
 									if (document.getElementsByClassName(classes[i]).length > 1) {
 										FinfiniteScrollPostClass = classes[i];
-										classRegex = new RegExp('\b' + FinfiniteScrollPostClass + '\b');
 										break;
 									}
 								}
