@@ -32,7 +32,8 @@ https://github.com/Riprock/ferhai.tumblr.com-theme
 		}
 		return parent1;
 	}
-	var page = 2;
+	var page = (new RegExp('/page/([^/]*)')).exec(window.location.pathname);
+	page = page ? parseInt(page[1]) + 1 : 2;
 	var tagged = (new RegExp('/tagged/([^/]*)')).exec(window.location.pathname);
 	tagged = tagged ? tagged[1] : '';
 	var classRegex;
