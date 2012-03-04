@@ -95,7 +95,7 @@ https://github.com/Riprock/ferhai.tumblr.com-theme
 						}
 					}
 				};
-				request.open('GET', window.location.origin + '/tagged/' + tagged + '/page/' + page);
+				request.open('GET', window.location.protocol + '//' + window.location.host + '/tagged/' + tagged + '/page/' + page);
 				request.send();
 				doingPage = page;
 			}
